@@ -34,17 +34,12 @@ export default function LoginForm() {
 
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [age, setAge] = useState(0);
   const [username, setUsername] = useState("");
-  const [role, setRole] = useState("");
-  const [msg, setMsg] = useState("");
 
  
   const createAccount = () => {
 
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/signup`, {
+    fetch(`/api/auth/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -52,19 +47,15 @@ export default function LoginForm() {
       body: JSON.stringify({
         email: email,
         password: password,
-        firstName: firstName,
-        lastName: lastName,
-        username: username,
-        age: age,
-        role: role
+        username: username
       }),
     })
       .then((res) => res.json())
       .then((data) => {
         
-          if (data.success) {
+          if (data.type == "success") {
             toast.success(data.message)
-            router.push("/");
+            router.push("/login");
           }
           else {
             toast.error(data.message)
@@ -89,14 +80,25 @@ export default function LoginForm() {
         
         
           <div className="grid gap-2">
-            <Label htmlFor="email">Username</Label>
+            <Label htmlFor="email">Email</Label>
             <Input
               id="email"
               type="email"
-              placeholder="psycho"
+              placeholder="psycho@gmail.com"
               required
               value={email}
               onChange={e=>setEmail(e.target.value)}
+            />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="username">Username</Label>
+            <Input
+              id="username"
+              type="text"
+              placeholder="psycho"
+              required
+              value={username}
+              onChange={e=>setUsername(e.target.value)}
             />
           </div>
           <div className="grid gap-2">

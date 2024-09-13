@@ -25,7 +25,7 @@ export default function LoginForm() {
   const [password, setPassword] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
-  const showToast = (message) => toast.success(message);
+
 
  
   const logintoAccount = () => {
@@ -33,7 +33,7 @@ export default function LoginForm() {
     toast.error("Fill all fields to create your account.");
    }
    else {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/generate-otp`, {
+    fetch(`/api/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -46,13 +46,12 @@ export default function LoginForm() {
       .then((res) => res.json())
       .then((data) => {
        
-          if (data.success) {
+          if (data.type == "success") {
             toast.success(data.message);
-
-            // show OTP Model
-            setIsOpen(true);
-        
-
+            SetUsername(data.user.username);
+            SetEmail(data.user.email);
+            SetIsLogin(true);
+            router.push("/");
           }
           else {
             toast.error(data.message);
