@@ -47,10 +47,11 @@ export default function LoginForm() {
       .then((data) => {
        
           if (data.type == "success") {
-            toast.success(data.message);
+            localStorage.setItem("kuick-token", data.token)
             SetUsername(data.user.username);
             SetEmail(data.user.email);
             SetIsLogin(true);
+            toast.success(data.message);
             router.push("/");
           }
           else {

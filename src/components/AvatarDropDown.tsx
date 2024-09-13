@@ -1,18 +1,6 @@
 import {
-    Cloud,
-    CreditCard,
-    Github,
-    Keyboard,
-    LifeBuoy,
     LogOut,
-    Mail,
-    MessageSquare,
-    Plus,
-    PlusCircle,
-    Settings,
-    User,
-    UserPlus,
-    Users,
+
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -22,17 +10,13 @@ import {
     DropdownMenuGroup,
     DropdownMenuItem,
     DropdownMenuLabel,
-    DropdownMenuPortal,
     DropdownMenuSeparator,
-    DropdownMenuShortcut,
-    DropdownMenuSub,
-    DropdownMenuSubContent,
-    DropdownMenuSubTrigger,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import Link from "next/link"
+import { Link1Icon } from "@radix-ui/react-icons"
 
 
 export function AvatarDropDown({ logout, userName }) {
@@ -42,27 +26,22 @@ export function AvatarDropDown({ logout, userName }) {
             <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon">
                     <Avatar>
-                        <AvatarImage src="https://github.com/hussnainahmad1606.png" />
-                        <AvatarFallback>ZS</AvatarFallback>
+                        <AvatarImage src="/" />
+                        <AvatarFallback>{userName.substring(0,2).toUpperCase()}</AvatarFallback>
                     </Avatar>
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56 mr-4">
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuLabel>Hi, {userName}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
                     <DropdownMenuItem>
-                        <Link href={`/profile/${userName}`} className="flex items-center justify-between">
-                            <User className="mr-2 h-4 w-4" />
-                            <span>Profile</span>
+                        <Link href={`/links`} className="flex items-center justify-between">
+                            <Link1Icon className="mr-2 h-4 w-4" />
+                            <span>Links</span>
                         </Link>
                     </DropdownMenuItem>
-                    <DropdownMenuItem>
-                        <Link href="/profile/settings" className="flex items-center justify-between">
-                            <Settings className="mr-2 h-4 w-4" />
-                            <span>Settings</span>
-                        </Link>
-                    </DropdownMenuItem>
+                    
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>

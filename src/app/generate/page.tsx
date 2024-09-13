@@ -27,7 +27,9 @@ import {
   AlertDescription,
   AlertTitle,
 } from "@/components/ui/alert"
+import { useUserStore } from "@/store/store"
 export default function CardWithForm() {
+  const {isLogin} = useUserStore();
   const [expiryCriteria, setExpiryCriteria] = React.useState("no");
   const [views, setViews] = React.useState(0);
   const [date, set] = React.useState(null);
@@ -67,7 +69,7 @@ export default function CardWithForm() {
               </Select>
             </div>
            {
-           expiryCriteria=="no"?(
+           isLogin==true&&expiryCriteria=="no"?(
               <div className="flex flex-col space-y-1.5">
               <Alert variant="destructive">
         <AlertCircle className="h-4 w-4" />

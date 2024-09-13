@@ -10,30 +10,20 @@ import { useRouter } from "next/navigation";
 import { AvatarDropDown } from "./AvatarDropDown";
 import { toast } from "react-hot-toast";
 import { buttonVariants } from "@/components/ui/button"
-
 const Navbar = () => {
   const router = useRouter()
 
 
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
+  const {Username, IsLogin, SetIsLogin} = useUserStore();
 
-  // const tokenVerification = async () => {
-  //   var token = localStorage.getItem("sycofusion_token");
-  //   var user = JSON.parse(localStorage.getItem("sycofusion_user"));
-  //   console.log("User set", user)
-  //   if (token || user) {
-  //     setUser(user);
-  //     setIsLogin(true)
-  //   }
-  //   else {
-  //     router.push('login')
-  //   }
-  // };
+ 
 
   const logout = () => {
-    localStorage.removeItem("toppr_token");
-
+    localStorage.removeItem("kuick-token");
+    SetIsLogin(false);
     toast.success("Logged out successfully");
+    router.push("/login");
   };
 
   // useEffect(() => {
@@ -43,9 +33,12 @@ const Navbar = () => {
   return (
     <>
       <div className='bg-background text-foreground flex w-full justify-between font-roboto shadow-md'>
-        <Link href={"/"} className="ml-4">
-          <Image alt="logo" width={60} height={60} src={"/logo.png"} />
+        
+
+        <Link href={"/"} className="font-bold text-2xl  m-5 font-[family-name:var(--font-geist-sans)]">
+         KuickShare
         </Link>
+    
         <nav className='hidden justify-end w-[70%] lg:flex'>
           <ul className='flex text-secondary-200 items-center justify-between lg:py-4 gap-x-4'>
             <li><a className="hover:text-foreground/60 transition-colors" href="/">Home</a></li>
@@ -58,8 +51,16 @@ const Navbar = () => {
      
                 <div className="flex gap-x-4">
                   <Button asChild  variant="outline"><Link href="/generate">Generate</Link></Button>
-                  <Button asChild><Link href="/login">Login</Link></Button>
+                {
+                  IsLogin?(
+                    <AvatarDropDown userName={Username} logout={logout}/>
+                  ):(
+                    <>
+                      <Button asChild><Link href="/login">Login</Link></Button>
                   <Button asChild><Link href="/signup">Sign up</Link></Button>
+                    </>
+                  )
+                }
                   
                 </div>
             
