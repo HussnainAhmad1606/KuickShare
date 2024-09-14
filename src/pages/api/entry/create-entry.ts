@@ -7,6 +7,16 @@ const saltRounds = 10;
 
 const key = Buffer.from(process.env.ENCRYPTION_KEY, 'base64');
 const iv = crypto.randomBytes(16);  // 128-bit IV (Initialization Vector)
+const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+function generateRandomString() {
+    let tempResult = '';
+    let charactersLength = characters.length;
+    for (let i = 0; i < 5; i++) {
+      tempResult += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return tempResult;
+  }
 
 // Function to encrypt text using AES-256-GCM
 function encryptText(plainText:String) {
@@ -25,13 +35,24 @@ function encryptText(plainText:String) {
 }
 
 const handler = async (req:NextApiRequest, res:NextApiResponse) => {
-
+   
+  
     if (req.method == "POST") {
         const data = encryptText(req.body.content)
         const encryptedContent = data.encryptedData;
         const iv = data.iv;
         const authTag = data.authTag;
         const hashedPassword = await bcrypt.hash(req.body.passcode, saltRounds);
+        let isUnique = false;
+        let shareCode;
+        while (!isUnique) {
+            shareCode = generateRandomString();
+            const entry = await Entry.findOne({shareCode: shareCode});
+            if (!entry) {
+                isUnique = true;
+            }
+
+        }
         let entry = new Entry({
 
             username: req.body.username,
@@ -41,11 +62,11 @@ const handler = async (req:NextApiRequest, res:NextApiResponse) => {
             iv: iv,
             authTag: authTag,
             encryptionAlgo: "",
-            shareCode: 12,
+            shareCode: shareCode,
             passcodeHash: hashedPassword,
-            expiryDate: req.body.expiryDate,
-            accessCount: req.body.accessCount,
-            maxAccessCount: req.body.maxAccessCount
+            expiryDate: req.body.expiryCriteria=="time"?req.body.date:null,
+            accessCount: 0,
+            maxAccessCount: req.body.expiryCriteria=="views"?req.body.views:null
             })
           
             const result = await entry.save();
@@ -53,7 +74,7 @@ const handler = async (req:NextApiRequest, res:NextApiResponse) => {
 
 
             const id = result._id; 
-        res.status(200).json({type: "success", message: "Entry Added Successfully", id: id})
+        res.status(200).json({type: "success", message: "Entry Added Successfully", id: id, shareCode:shareCode})
        }
 
     else {

@@ -26,9 +26,33 @@ const Navbar = () => {
     router.push("/login");
   };
 
-  // useEffect(() => {
-  //   tokenVerification();
-  // }, []);
+  const tokenVerification = async() => {
+    let token = localStorage.getItem("kuick-token");
+    if(token){
+      let response = await fetch("/api/auth/verify", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({token})
+      });
+      let data = await response.json();
+      if(data.type == "success"){
+        SetIsLogin(true);
+      }
+      else{
+        SetIsLogin(false);
+        localStorage.removeItem("kuick-token");
+      }
+    }
+    else{
+      SetIsLogin(false);
+
+  }
+  }
+  useEffect(() => {
+    tokenVerification();
+  }, []);
 
   return (
     <>

@@ -1,8 +1,10 @@
 import React from 'react'
-
+import EntryCard from "@/components/EntryCard";
 function page() {
   return (
-    <div>Links</div>
+    <div>
+      <EntryCard/>
+    </div>
   )
 }
 

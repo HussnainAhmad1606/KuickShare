@@ -5,8 +5,10 @@ import { Button, buttonVariants } from './ui/button'
 import { Input } from './ui/input'
 import Link from 'next/link'
 import { Menu } from 'lucide-react'
+import { useUserStore } from '@/store/store'
 
 const ResponsiveNavDrawer = ({ isOpen, setIsOpen }) => {
+    const {Username} = useUserStore();
     const drawerRef = useRef();
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -36,7 +38,7 @@ const ResponsiveNavDrawer = ({ isOpen, setIsOpen }) => {
             {true &&
                 (<div className='flex flex-col items-center justify-center mt-8 gap-y-4'>
                     <Avatar>
-                        <AvatarImage src="https://github.com/zohaibsaeed117.png" alt="@zohaibsaeed117" />
+                        <AvatarImage src="/" alt={Username} />
                         <AvatarFallback>ZS</AvatarFallback>
                     </Avatar>
                     <div>
