@@ -38,47 +38,18 @@ const handler = async (req:NextApiRequest, res:NextApiResponse) => {
    
   
     if (req.method == "POST") {
-        const data = encryptText(req.body.content)
-        const encryptedContent = data.encryptedData;
-        const iv = data.iv;
-        const authTag = data.authTag;
-        let hashedPassword = "";
-        if (req.body.passcode) {
-            hashedPassword = await bcrypt.hash(req.body.passcode, saltRounds);
-        }
-
-        let isUnique = false;
-        let shareCode;
-        while (!isUnique) {
-            shareCode = generateRandomString();
-            const entry = await Entry.findOne({shareCode: shareCode});
-            if (!entry) {
-                isUnique = true;
+        const entry = await Entry.findOne({shareCode: req.body.shareCode});
+        if (entry) {
+            if (entry.passcodeHash == "") {
+                res.status(200).json({type: "success", isProtected: false, entry: entry});
             }
-
+            else {
+                res.status(200).json({type: "success", isProtected: true});
+            }
         }
-        let entry = new Entry({
-
-            username: req.body.username,
-            title: req.body.title,
-            type: req.body.type,
-            encryptedContent: encryptedContent,
-            iv: iv,
-            authTag: authTag,
-            encryptionAlgo: "",
-            shareCode: shareCode,
-            passcodeHash: hashedPassword,
-            expiryDate: req.body.expiryCriteria=="time"?req.body.date:null,
-            accessCount: 0,
-            maxAccessCount: req.body.expiryCriteria=="views"?req.body.views:null
-            })
-          
-            const result = await entry.save();
-        
-
-
-            const id = result._id; 
-        res.status(200).json({type: "success", message: "Entry Added Successfully", id: id, shareCode:shareCode})
+        else {
+            res.status(400).json({type: "error", message: "ERROR. "})
+        }
        }
 
     else {

@@ -15,7 +15,7 @@ const Navbar = () => {
 
 
   const [isOpen, setIsOpen] = useState(false);
-  const {Username, IsLogin, SetIsLogin} = useUserStore();
+  const {Username, IsLogin, SetIsLogin, SetEmail, SetUsername} = useUserStore();
 
  
 
@@ -28,6 +28,7 @@ const Navbar = () => {
 
   const tokenVerification = async() => {
     let token = localStorage.getItem("kuick-token");
+    console.log(token)
     if(token){
       let response = await fetch("/api/auth/verify", {
         method: "POST",
@@ -38,11 +39,12 @@ const Navbar = () => {
       });
       let data = await response.json();
       if(data.type == "success"){
+        SetUsername(data.user.username);
+        SetEmail(data.user.email);
         SetIsLogin(true);
       }
       else{
         SetIsLogin(false);
-        localStorage.removeItem("kuick-token");
       }
     }
     else{

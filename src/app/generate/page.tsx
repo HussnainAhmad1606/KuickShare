@@ -52,8 +52,8 @@ export default function CardWithForm() {
   const [content, setContent] = React.useState("");
   const [passcode, setPasscode] = React.useState("");
   const [type, setType] = React.useState("");
-  const [isModalOpen, setIsModalOpen] = React.useState(true);
-  const [shareCode, setShareCode] = React.useState("3")
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [shareCode, setShareCode] = React.useState("")
 
 
   const show = async() => {
