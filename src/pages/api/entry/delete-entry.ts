@@ -13,8 +13,8 @@ const handler = async (req:NextApiRequest, res:NextApiResponse) => {
             const token = authorization?.split(' ')[1];
           const decoded = verifyToken(token, process.env.JWT_SECRET);
           const { username } = decoded;
-            const entries = await Entry.find({username: username});
-            res.status(200).json({type: "success", message: "Entries found.", entries:entries})
+            const entries = await Entry.deleteOne({username: username, shareCode: req.body.shareCode});;
+            res.status(200).json({type: "success", message: "Entries deleted successfully"})
         }
         catch(error) {
             console.log(error);
