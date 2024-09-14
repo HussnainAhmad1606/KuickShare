@@ -32,8 +32,9 @@ export default function EntryCard({entry, deleteEntry}: {entry: any, deleteEntry
         </div>
 
         <CardDescription>Created: {new Date(entry?.createdAt).toLocaleString()}</CardDescription>
+        <CardDescription>Expired: <Badge>{entry?.isDeleted==true?"Yes":"No"}</Badge></CardDescription>
         <CardDescription>Encrypted Content:</CardDescription>
-        <CardDescription>{entry?.encryptedContent}</CardDescription>
+        <CardDescription className="break-words overflow-hidden text-ellipsis">{entry?.encryptedContent}</CardDescription>
       </CardHeader>
       <CardContent>
       </CardContent>

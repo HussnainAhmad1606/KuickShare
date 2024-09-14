@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { AvatarDropDown } from "./AvatarDropDown";
 import { toast } from "react-hot-toast";
 import { buttonVariants } from "@/components/ui/button"
+import ThemeToggle from "./ThemeToggle";
 const Navbar = () => {
   const router = useRouter()
 
@@ -67,14 +68,14 @@ const Navbar = () => {
         <nav className='hidden justify-end w-[70%] lg:flex'>
           <ul className='flex text-secondary-200 items-center justify-between lg:py-4 gap-x-4'>
             <li><a className="hover:text-foreground/60 transition-colors" href="/">Home</a></li>
-            <li><a className="hover:text-foreground/60 transition-colors" href="/forum">Forum</a></li>
             <li><a className="hover:text-foreground/60 transition-colors" href="/about">About</a></li>
-            <li><a className="hover:text-foreground/60 transition-colors" href="/contact">Contact</a></li>
+           
             <SeparatorHorizontal orientation="vertical" className="w-[2px] bg-muted-foreground" />
           </ul>
           <div className="flex items-center justify-center mx-4">
      
                 <div className="flex gap-x-4">
+                  <ThemeToggle/>
                   <Button asChild  variant="outline"><Link href="/generate">Generate</Link></Button>
                 {
                   IsLogin?(

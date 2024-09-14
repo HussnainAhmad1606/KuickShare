@@ -15,8 +15,6 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { toast } from "react-hot-toast"
 
-export const description =
-  "A simple login form with email and password. The submit button says 'Sign in'."
 
 export default function LoginForm() {
   const {IsLogin, SetEmail,SetIsLogin, SetUsername} = useUserStore();

@@ -4,6 +4,8 @@ import "@/css/globals.css";
 import Navbar from "@/components/Navbar";
 import { Toaster } from "react-hot-toast";
 import NextTopLoader from 'nextjs-toploader';
+import Footer from "@/components/Footer";
+import { ThemeProvider } from "@/components/theme-provider"
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,10 +29,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+            <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
       <Toaster/>
       <NextTopLoader
       color="#000000"
@@ -49,6 +57,9 @@ export default function RootLayout({
       />
         <Navbar/>
         {children}
+
+        <Footer/>
+        </ThemeProvider>
       </body>
     </html>
   );
