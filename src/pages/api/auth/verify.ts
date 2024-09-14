@@ -10,7 +10,10 @@ const verifyHandler = async (req:NextApiRequest, res:NextApiResponse) => {
         if (!verification) {
             return res.status(401).json({ type: "error", message: "Invalid Token" })
         }
-        const user = await User.findOne({ username: verification.username }, { password: 0, createdAt: 0, updatedAt: 0, __v: 0 });
+        const user = {
+            username: verification.username,
+            email: verification.email
+        }
       
         res.status(200).json({ type: "success", message: "Token verified", user: user});
 

@@ -25,7 +25,19 @@ function page({params}:any) {
     const [passcode, setPasscode] = useState<string>("");
     const [isModalOpen, setIsModalOpen] = useState(true);
     const [isProtected, setIsProtected] = useState(true);
+    const [msg, setMsg] = useState("Content is Protected");
 
+    const increaseAccessCount = async() => {
+        const res = await fetch(`/api/entry/increase-access-count`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({shareCode: shareCode})
+        });
+        const data = await res.json();
+        console.log(data);
+    }
     const getEntry = async() => {
         const res = await fetch(`/api/entry/get-entry`, {
             method: 'POST',
@@ -35,14 +47,22 @@ function page({params}:any) {
             body: JSON.stringify({shareCode: shareCode})
         });
         const data = await res.json();
+       if (data.type == "success") {
         if (data.isProtected) {
-            setIsModalOpen(true);
-            setIsProtected(true);
-        }
-        else {
-          setIsProtected(false);
-          setEntry(data.entry)
-        }
+          setIsModalOpen(true);
+          setIsProtected(true);
+      }
+      else {
+        setIsProtected(false);
+        setEntry(data.entry);
+        increaseAccessCount();
+      }
+      }
+      else {
+        setIsModalOpen(false);
+        toast.error(data.message);
+        setMsg(data.message)
+      }
     }
 
     useEffect(() => {
@@ -61,11 +81,11 @@ function page({params}:any) {
 
   return (
     <div>
-        <EnterCodeModal setEntry={setEntry} shareCode={shareCode} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} setIsProtected={setIsProtected}/>
+        <EnterCodeModal increaseAccessCount={increaseAccessCount} setEntry={setEntry} shareCode={shareCode} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} setIsProtected={setIsProtected}/>
         {
           isProtected?(
             <div className='flex justify-center items-center w-full h-screen'>
-            <h1 className='font-bold text-4xl'>Content is Protected</h1>
+            <h1 className='font-bold text-4xl'>{msg}</h1>
               </div>
           ):(
            <div className='flex justify-center items-center h-[120vh] w-full'>

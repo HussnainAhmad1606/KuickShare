@@ -28,7 +28,6 @@ const Navbar = () => {
 
   const tokenVerification = async() => {
     let token = localStorage.getItem("kuick-token");
-    console.log(token)
     if(token){
       let response = await fetch("/api/auth/verify", {
         method: "POST",

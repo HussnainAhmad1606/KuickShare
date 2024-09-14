@@ -39,7 +39,7 @@ const handler = async (req:NextApiRequest, res:NextApiResponse) => {
   
     if (req.method == "POST") {
         const entry = await Entry.findOne({shareCode: req.body.shareCode});
-        if (entry) {
+        if (entry && entry.isDeleted == false) {
             if (entry.passcodeHash == "") {
                 res.status(200).json({type: "success", isProtected: false, entry: entry});
             }
@@ -48,7 +48,7 @@ const handler = async (req:NextApiRequest, res:NextApiResponse) => {
             }
         }
         else {
-            res.status(400).json({type: "error", message: "ERROR. "})
+            res.status(400).json({type: "error", message: "ERROR. This entry may not exist or has been expired."})
         }
        }
 

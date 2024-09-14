@@ -4,7 +4,7 @@ import { Copy } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-export default function EnterCodeModal ({setEntry,setIsProtected,shareCode, isModalOpen, setIsModalOpen}:any) {
+export default function EnterCodeModal ({setEntry,increaseAccessCount,setIsProtected,shareCode, isModalOpen, setIsModalOpen}:any) {
 
   const [password, setPassword] = useState("");
 
@@ -34,6 +34,7 @@ export default function EnterCodeModal ({setEntry,setIsProtected,shareCode, isMo
     setEntry(data.entry);
     console.log(data.entry)
     closeModal();
+    increaseAccessCount();
   }
 
 
