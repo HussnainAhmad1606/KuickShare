@@ -13,7 +13,7 @@ const handler = async (req:NextApiRequest, res:NextApiResponse) => {
             await Entry.updateOne({ shareCode: req.body.shareCode }, { $inc: { accessCount: 1 } });
     
            
-            if (entry.accessCount + 1 >= entry.maxAccessCount && entry.expiryDate == null) {
+            if (entry.accessCount + 1 == entry.maxAccessCount && entry.expiryDate == null) {
                 
                 await Entry.updateOne({ shareCode: req.body.shareCode }, { $set: { isDeleted: true } });
                 console.log("Max Access Count Reached")
