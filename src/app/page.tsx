@@ -8,7 +8,7 @@ export default function Home() {
       <h1 className="text-6xl font-bold">Private and Secure Content Storage</h1>
       <p className="my-10">Easily save and share your links and text with complete data protection</p>
       <Button asChild>
-  <Link href="/login">Get Started</Link>
+  <Link href="/generate">Get Started</Link>
 </Button>
     </div>
   );
