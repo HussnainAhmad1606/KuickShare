@@ -1,36 +1,30 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kuick Share
 
-## Getting Started
+**Kuick Share** is a secure web platform designed for quickly storing and sharing links or text with end-to-end encryption. Whether you need to share sensitive information or just a simple link, Kuick Share ensures your data is protected and can be set to expire automatically based on your preferences.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- 🔐 **AES-256 Encryption**: All shared data is securely encrypted to protect sensitive information.
+- ⏳ **Expiration Management**: Users can set expiration times for stored entries, ensuring content auto-deletes after a specified period.
+- ⚡ **Quick Access**: Easily store and retrieve content from anywhere, even without a messaging app.
+- 🌍 **End-to-End Encryption**: Your data remains protected from the moment it’s uploaded until it’s accessed.
+- 📜 **Simple Retrieval**: Share links with others for easy access to stored content.
+- 🔄 **Automated Expiry with Cron Jobs**: Automatic deletion of expired content using scheduled cron jobs.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Frontend & Backend**: Built with **Next.js** for seamless user experience.
+- **Database**: **MongoDB** for scalable, efficient data storage.
+- **Encryption**: Utilizes **AES-256** encryption for data protection.
+- **Cron Jobs**: Handles link expiration and automated data deletion.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Installation & Usage
 
-## Learn More
+1. Clone the repository
+2. Install dependencies with `npm install`
+3. Set up environment variables for encryption key, database, etc.
+4. Run the application with `npm run dev`
 
-To learn more about Next.js, take a look at the following resources:
+## Contribute
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Feel free to contribute to the project by forking the repository and submitting pull requests!
