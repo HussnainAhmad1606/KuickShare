@@ -43,7 +43,7 @@ export default function RootLayout({
       <Toaster/>
       <Analytics/>
       <NextTopLoader
-      color="#000000"
+      color="#ea580c"
       initialPosition={0.08}
       crawlSpeed={200}
       height={3}
