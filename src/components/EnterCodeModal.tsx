@@ -52,7 +52,7 @@ export default function EnterCodeModal ({setEntry,increaseAccessCount,setIsProte
           >
             {/* Modal Header */}
             <div className="flex justify-between items-center border-b pb-3">
-              <h2 className="text-xl font-semibold">Password Protected</h2>
+              <h2 className="text-xl text-primary font-semibold">Password Protected</h2>
              
             </div>
 
@@ -62,7 +62,7 @@ export default function EnterCodeModal ({setEntry,increaseAccessCount,setIsProte
 
               <div className="my-5 flex items-center" >
               <h1 className="text-3xl font-bold mx-5">{}</h1>
-            <div className="flex flex-col space-y-1.5">
+            <div className="flex text-primary flex-col space-y-1.5">
            
               <Input value={password} onChange={e=>setPassword(e.target.value)} id="password" placeholder="Enter Passcode" />
             </div>

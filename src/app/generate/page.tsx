@@ -24,19 +24,12 @@ import { cn } from "@/lib/utils"
 
 import { Textarea } from "@/components/ui/textarea"
 import { AlertCircle, User } from "lucide-react"
-import { format } from "date-fns"
-import { Calendar as CalendarIcon } from "lucide-react"
+
 import {
   Alert,
   AlertDescription,
   AlertTitle,
 } from "@/components/ui/alert"
-import { Calendar } from "@/components/ui/calendar"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
 
 import { useUserStore } from "@/store/store"
 import { DateTimePicker } from '@/components/ui/datetime-picker';
@@ -52,8 +45,8 @@ export default function CardWithForm() {
   const [content, setContent] = React.useState("");
   const [passcode, setPasscode] = React.useState("");
   const [type, setType] = React.useState("");
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
-  const [shareCode, setShareCode] = React.useState("")
+  const [isModalOpen, setIsModalOpen] = React.useState(true);
+  const [shareCode, setShareCode] = React.useState("3")
 
 
   const show = async() => {

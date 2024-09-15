@@ -40,7 +40,7 @@ export default function ShareCodeModal ({shareCode, isModalOpen, setIsModalOpen}
           >
             {/* Modal Header */}
             <div className="flex justify-between items-center border-b pb-3">
-              <h2 className="text-xl font-semibold">Entry Created</h2>
+              <h2 className="text-xl text-primary font-semibold">Entry Created</h2>
               <button
                 onClick={closeModal}
                 className="text-gray-500 hover:text-gray-700"
@@ -54,18 +54,18 @@ export default function ShareCodeModal ({shareCode, isModalOpen, setIsModalOpen}
               <p className="text-gray-700">Here is the share code for this entry</p>
 
               <div className="my-5 flex items-center" >
-              <h1 className="text-3xl font-bold mx-5">{shareCode}</h1>
+              <h1 className="text-3xl text-primary font-bold mx-5">{shareCode}</h1>
               <Button onClick={copyToClipboard}>{<Copy/>}</Button>
               </div>
-              <b>How to access?</b>
-              <p>Go to https://kuick-share.vercel.app/entry/<b>{shareCode}</b></p>
+              <b className="text-primary">How to access?</b>
+              <p className="text-primary">Go to https://kuick-share.vercel.app/entry/<b>{shareCode}</b></p>
             </div>
 
             {/* Modal Footer */}
             <div className="mt-6 flex justify-end">
               <Button
                 onClick={closeModal}
-                className="px-4 py-2 text-white rounded hover:bg-red-700"
+                className="px-4 py-2 text-white rounded"
               >
                 Close
               </Button>

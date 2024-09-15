@@ -6,6 +6,7 @@ import { Toaster } from "react-hot-toast";
 import NextTopLoader from 'nextjs-toploader';
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/theme-provider"
+import { Analytics } from "@vercel/analytics/react"
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -40,6 +41,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
       <Toaster/>
+      <Analytics/>
       <NextTopLoader
       color="#000000"
       initialPosition={0.08}
